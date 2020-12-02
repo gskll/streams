@@ -14,7 +14,7 @@ const streamReducer = (state = {}, action) => {
         ...action.payload.reduce((newState, stream) => {
           newState[stream.id] = stream;
           return newState;
-        }),
+        }, {}),
       };
     case FETCH_STREAM:
     case CREATE_STREAM:
