@@ -1,3 +1,34 @@
 {
-  "streams": []
+  "streams": [
+    {
+      "title": "My Stream",
+      "description": "This is a great stream",
+      "userId": "115464974006328159979",
+      "id": 1
+    },
+    {
+      "title": "Other Stream",
+      "description": "Another stream",
+      "userId": "115464974006328159979",
+      "id": 2
+    },
+    {
+      "title": "User 2's stream",
+      "description": "This stream is not mine",
+      "userId": "100703259924514399062",
+      "id": 3
+    },
+    {
+      "title": "User 2's other stream",
+      "description": "This stream is not mine",
+      "userId": "100703259924514399062",
+      "id": 4
+    },
+    {
+      "title": "I created this stream",
+      "description": "This was created by me",
+      "userId": "115464974006328159979",
+      "id": 5
+    }
+  ]
 }
