@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchStreams } from "../../actions";
+import { fetchStreams, streamListOptions } from "../../actions";
 
 class StreamList extends React.Component {
   componentDidMount() {
@@ -27,7 +27,13 @@ class StreamList extends React.Component {
   }
 
   renderList() {
-    return this.props.streams.map((stream) => {
+    const streams = this.props.showAllStreams
+      ? this.props.streams
+      : this.props.streams.filter(
+          (stream) => stream.userId === this.props.currentUserId
+        );
+
+    return streams.map((stream) => {
       return (
         <div key={stream.id} className="item">
           {this.renderAdmin(stream)}
@@ -55,10 +61,37 @@ class StreamList extends React.Component {
     }
   }
 
+  renderListOptions() {
+    const all = this.props.showAllStreams;
+
+    const activeClassName = "ui button primary";
+    const nonActiveClassName = "ui button basic primary";
+
+    if (this.props.isSignedIn) {
+      return (
+        <div className="ui buttons">
+          <button
+            onClick={() => this.props.streamListOptions(true)}
+            className={all ? activeClassName : nonActiveClassName}
+          >
+            All Streams
+          </button>
+          <button
+            onClick={() => this.props.streamListOptions(false)}
+            className={all ? nonActiveClassName : activeClassName}
+          >
+            My Streams
+          </button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
         <h2>Streams</h2>
+        {this.renderListOptions()}
         <div className="ui celled list">{this.renderList()}</div>
         {this.renderCreate()}
       </div>
@@ -71,7 +104,10 @@ const mapStateToProps = (state) => {
     streams: Object.values(state.streams),
     currentUserId: state.auth.userId,
     isSignedIn: state.auth.isSignedIn,
+    showAllStreams: state.streamListOptions.showAllStreams,
   };
 };
 
-export default connect(mapStateToProps, { fetchStreams })(StreamList);
+export default connect(mapStateToProps, { fetchStreams, streamListOptions })(
+  StreamList
+);

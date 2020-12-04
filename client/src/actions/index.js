@@ -8,6 +8,7 @@ import {
   FETCH_STREAMS,
   EDIT_STREAM,
   DELETE_STREAM,
+  STREAM_LIST_OPTIONS,
 } from "./types";
 
 export const signIn = (userId) => {
@@ -20,6 +21,13 @@ export const signIn = (userId) => {
 export const signOut = () => {
   return {
     type: SIGN_OUT,
+  };
+};
+
+export const streamListOptions = (showAllStreams) => {
+  return {
+    type: STREAM_LIST_OPTIONS,
+    payload: showAllStreams,
   };
 };
 
